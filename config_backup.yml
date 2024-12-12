@@ -1,7 +1,7 @@
 ---
 
 - name: IOS ROUTERS
-  hosts: switches
+  hosts: routers
   gather_facts: false
   connection: network_cli
 
@@ -17,7 +17,7 @@
         dest: "./config-backups/show_run_{{ inventory_hostname }}.txt"
 
 - name: IOS SWITCHES
-  hosts: routers
+  hosts: switches
   gather_facts: false
   connection: network_cli
 
