@@ -1,0 +1,55 @@
+---
+
+- name: IOS ROUTERS
+  hosts: switches
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: IOS CONFIG
+      ios_command:
+        commands: show run
+      register: output_router
+
+    - name: SAVE ROUTER CONFIG
+      copy:
+        content: "{{ output_router.stdout[0] }}"
+        dest: "./config-backups/show_run_{{ inventory_hostname }}.txt"
+
+- name: IOS SWITCHES
+  hosts: routers
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: IOS CONFIG
+      ios_command:
+        commands: show run
+      register: output_switch
+
+    - name: SAVE SWITCH CONFIG
+      copy:
+        content: "{{ output_switch.stdout[0] }}"
+        dest: "./config-backups/show_run_{{ inventory_hostname }}.txt"
+
+- name: GIT SECTION
+  hosts: localhost
+
+  tasks:
+
+    - name: print time
+      command: date
+      register: time
+      changed_when: false
+      delegate_to: localhost
+      run_once: yes
+
+    - name: git commands
+      shell: |
+        git add .
+        git commit -m "Device Backup on {{time.stdout}} "
+        git push
+      args:
+        chdir: ./config-backups
+      delegate_to: localhost
+      run_once: yes
