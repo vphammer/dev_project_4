@@ -1,0 +1,44 @@
+- name: Configure Basic Settings R1
+  hosts: router
+  gather_facts: no
+  connection: network_cli
+  become_method: enable
+  
+  tasks:
+  - name: Change hostname
+    cisco.ios.ios_hostname:
+      config:
+        hostname: R1
+
+  
+- name: Configure Basic Settings SW1
+  hosts: switch
+  gather_facts: no
+  connection: network_cli
+  become_method: enable
+  
+  tasks:
+  - name: Change hostname
+    cisco.ios.ios_hostname:
+      config:
+        hostname: SW1
+
+
+  
+- name: Configure Basic Settings SW1
+  hosts: all
+  gather_facts: no
+  connection: network_cli
+  become_method: enable
+  tasks:
+  - name: Change domain name
+    cisco.ios.ios_config:
+      lines:
+        ip domain-name kevin.techify
+  - name: Configure vty lines for ssh
+    cisco.ios.ios_config:
+      lines:
+        - line vty 0 15
+        - transport input ssh
+        - login local
+      parents: line vty 0 15

@@ -2,18 +2,18 @@
 
 tasks:
 
-- name: CREATE TIMESTAMPED DIRECTORY
+- name: TIMESTAMP DIRECTORY
   hosts: localhost
   gather_facts: true
 
   tasks:
-    - name: GET DATE AND TIME
+    - name: set date and time fact
       ansible.builtin.debug:
         var: ansible_date_time
         set_fact:
           date_time: "{{ ansible_date_time.date }}_{{ ansible_date_time.time }}"
           
-    - name: MAKE DIRECTORY
+    - name: make directory
       command: mkdir -p ./config-backups/{{ date_time }}
 
 - name: IOS ROUTERS

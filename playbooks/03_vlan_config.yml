@@ -1,0 +1,53 @@
+- name: Configure Basic Settings R1
+  hosts: switches
+  gather_facts: no
+  connection: network_cli
+  become_method: enable
+
+  tasks:
+  - name: Create VLANS
+    cisco.ios.ios_vlans:
+      config:
+        - name: Management
+          vlan_id: 10
+        - name: Sales
+          vlan_id: 20
+        - name: Marketing
+          vlan_id: 30
+        - name: IT
+          vlan_id: 69
+        - name: FunnyIT
+          vlan_id: 169
+        - name: FunnyIT2
+          vlan_id: 269
+        - name: FunnyIT3
+          vlan_id: 369
+        - name: FunnyIT4
+          vlan_id: 469
+        - name: FunnyIT5
+          vlan_id: 569
+        - name: FunnyIT6
+          vlan_id: 669
+        - name: FunnyIT7
+          vlan_id: 769
+        - name: FunnyIT8
+          vlan_id: 869
+        - name: FunnyIT9
+          vlan_id: 969
+        - name: FunnyIT10
+          vlan_id: 1069
+        - name: FunnyIT11
+          vlan_id: 1169
+        - name: FunnyIT12
+          vlan_id: 1269
+        - name: FunnyIT13
+          vlan_id: 1369
+        - name: FunnyIT14
+          vlan_id: 1469
+        - name: FunnyIT15
+          vlan_id: 1569
+        - name: FunnyIT16
+          vlan_id: 1669
+        - name: FunnyIT17
+          vlan_id: 1769
+        
