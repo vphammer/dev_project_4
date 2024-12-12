@@ -1,5 +1,21 @@
 ---
 
+tasks:
+
+- name: TIMESTAMP DIRECTORY
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: date and time
+      ansible.builtin.debug:
+        var: ansible_date_time
+    - name: set date and time fact
+      ansible.builtin.debug:
+        set_fact:
+          date_time: "{{ ansible_date_time.date }}_{{ ansible_date_time.time }}"
+    - name: make directory
+      command: mkdir -p ./config-backups/{{ date_time }}
+
 - name: IOS ROUTERS
   hosts: routers
   gather_facts: false
@@ -14,7 +30,7 @@
     - name: SAVE ROUTER CONFIG
       copy:
         content: "{{ output_router.stdout[0] }}"
-        dest: "./config-backups/show_run_{{ inventory_hostname }}.txt"
+        dest: "./config-backups/{{ date_time }}/show_run_{{ inventory_hostname }}.txt"
 
 - name: IOS SWITCHES
   hosts: switches
@@ -30,26 +46,4 @@
     - name: SAVE SWITCH CONFIG
       copy:
         content: "{{ output_switch.stdout[0] }}"
-        dest: "./config-backups/show_run_{{ inventory_hostname }}.txt"
-
-- name: GIT SECTION
-  hosts: localhost
-
-  tasks:
-
-    - name: print time
-      command: date
-      register: time
-      changed_when: false
-      delegate_to: localhost
-      run_once: yes
-
-    - name: git commands
-      shell: |
-        git add .
-        git commit -m "Device Backup on {{time.stdout}} "
-        git push
-      args:
-        chdir: ./config-backups
-      delegate_to: localhost
-      run_once: yes
+        dest: "./config-backups/{{ date_time }}/show_run_{{ inventory_hostname }}.txt"  
