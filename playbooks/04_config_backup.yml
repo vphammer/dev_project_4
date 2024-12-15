@@ -14,7 +14,7 @@ tasks:
           date_time: "{{ ansible_date_time.date }}_{{ ansible_date_time.time }}"
           
     - name: make directory
-      command: mkdir -p ./config-backups/{{ date_time }}
+      command: mkdir -p ../config-backups/{{ date_time }}
 
 - name: IOS ROUTERS
   hosts: routers
