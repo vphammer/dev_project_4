@@ -21,3 +21,5 @@ This project involved creating Ansible playbooks, ansible configuration files, a
 
 ### Ansible Output
 ![image](https://github.com/user-attachments/assets/5647cd49-52f7-43c2-993a-2e7c4e89d4a2)
+
+### Network Diagram
