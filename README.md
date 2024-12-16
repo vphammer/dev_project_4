@@ -1,6 +1,9 @@
 # dev_project_4
 Ansible Network Automations
 
+## Project Goals
+* To create Ansible playbooks that automates basic steps in Cisco device configurations
+
 ### 01_test_connectivity.yml
 * Tests the connectivity of ansible to the devices being configured
 
