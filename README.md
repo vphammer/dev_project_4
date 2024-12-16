@@ -1,5 +1,7 @@
 # dev_project_4
-Ansible Network Automations
+CNIT-381 Dev Project 4
+
+This project involved creating Ansible playbooks, ansible configuration files, and inventory files to automate a network using Ansible.
 
 ## Project Goals
 * To create Ansible playbooks that automates basic steps in Cisco device configurations
