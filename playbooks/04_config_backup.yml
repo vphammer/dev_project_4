@@ -16,12 +16,12 @@
   tasks:
     - name: IOS CONFIG
       ios_command:
-        commands: show run
+        commands: copy run start
       register: output_router
 
     - name: SAVE ROUTER CONFIG
       fetch:
-        content: "{{ output_router.stdout[0] }}"
+        src: "flash:/startup-config"
         dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"
 
 - name: IOS SWITCHES
@@ -32,10 +32,10 @@
   tasks:
     - name: IOS CONFIG
       ios_command:
-        commands: show run
+        commands: copy run start
       register: output_switch
 
     - name: SAVE SWITCH CONFIG
       fetch:
-        content: "{{ output_switch.stdout[0] }}"
+        src: "flash:/startup-config"
         dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"  
