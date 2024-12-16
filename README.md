@@ -17,3 +17,7 @@ This project involved creating Ansible playbooks, ansible configuration files, a
 
 ### 04_config_backup.yml
 * Backs up the running-config of each device
+
+
+### Ansible Output
+![image](https://github.com/user-attachments/assets/ecfa5676-c630-4dc2-bbe3-d7a3b6b3e17f)
