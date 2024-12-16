@@ -32,4 +32,4 @@
        backup: yes
        backup_options:
          filename: "switch_running-config.txt"
-         dir_path: "../config-backups/{{ inventory_hostname }}"
+         dir_path: "./config-backups/{{ inventory_hostname }}"
