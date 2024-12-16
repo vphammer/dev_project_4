@@ -14,12 +14,12 @@
   connection: network_cli
 
   tasks:
-    -name: backup running-config
-    ios_config:
-       backup: yes
-       backup_options:
-         filename: "router_running-config.txt"
-         dir_path: "./config-backups/{{ inventory_hostname }}"
+    - name: backup running-config
+      ios_config:
+        backup: yes
+        backup_options:
+          filename: "router_running-config.txt"
+          dir_path: "./config-backups/{{ inventory_hostname }}"
 
 - name: IOS SWITCHES
   hosts: switches
