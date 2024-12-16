@@ -5,7 +5,7 @@
   tasks:
     - name: set date and time fact
       ansible.builtin.set_fact:
-        date_time: "{{ ansible_date_time.date }}_{{ ansible_date_time.time }}"
+        date_time: "{{ ansible_date_time.date }}"
           
     - name: make directory
       ansible.builtin.file:
