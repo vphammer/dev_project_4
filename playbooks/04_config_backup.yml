@@ -14,15 +14,12 @@
   connection: network_cli
 
   tasks:
-    - name: IOS CONFIG
-      ios_command:
-        commands: copy run start
-      register: output_router
-
-    - name: SAVE ROUTER CONFIG
-      fetch:
-        src: "flash:/startup-config"
-        dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"
+    -name: backup running-config
+    ios_config:
+       backup: yes
+       backup_options:
+         filename: "running-config-{{ timestamp.stdout }}.txt"
+         dir_path: "./config-backups/{{ inventory_hostname }}"
 
 - name: IOS SWITCHES
   hosts: switches
@@ -30,12 +27,9 @@
   connection: network_cli
 
   tasks:
-    - name: IOS CONFIG
-      ios_command:
-        commands: copy run start
-      register: output_switch
-
-    - name: SAVE SWITCH CONFIG
-      fetch:
-        src: "flash:/startup-config"
-        dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"  
+    - name: backup running-config
+      ios_config:
+       backup: yes
+       backup_options:
+         filename: "running-config-{{ timestamp.stdout }}.txt"
+         dir_path: "../config-backups/{{ inventory_hostname }}"
