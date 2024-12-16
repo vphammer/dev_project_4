@@ -20,7 +20,7 @@
       register: output_router
 
     - name: SAVE ROUTER CONFIG
-      copy:
+      fetch:
         content: "{{ output_router.stdout[0] }}"
         dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"
 
@@ -36,6 +36,6 @@
       register: output_switch
 
     - name: SAVE SWITCH CONFIG
-      copy:
+      fetch:
         content: "{{ output_switch.stdout[0] }}"
         dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"  
