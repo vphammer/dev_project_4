@@ -5,7 +5,7 @@
   tasks:  
     - name: make directory
       ansible.builtin.file:
-        path: "../config-backups/{{ ansible_date_time.date }}"
+        path: "../config-backups"
         state: directory
 
 - name: IOS ROUTERS
@@ -22,7 +22,7 @@
     - name: SAVE ROUTER CONFIG
       copy:
         content: "{{ output_router.stdout[0] }}"
-        dest: "../config-backups/{{ ansible_date_time.date }}/show_run_{{ inventory_hostname }}.txt"
+        dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"
 
 - name: IOS SWITCHES
   hosts: switches
@@ -38,4 +38,4 @@
     - name: SAVE SWITCH CONFIG
       copy:
         content: "{{ output_switch.stdout[0] }}"
-        dest: "../config-backups/{{ ansible_date_time.date }}/show_run_{{ inventory_hostname }}.txt"  
+        dest: "../config-backups/show_run_{{ inventory_hostname }}.txt"  
