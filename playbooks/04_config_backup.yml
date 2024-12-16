@@ -8,7 +8,9 @@
         date_time: "{{ ansible_date_time.date }}_{{ ansible_date_time.time }}"
           
     - name: make directory
-      command: mkdir -p ../config-backups/{{ date_time }}
+      ansible.builtin.file:
+        path: "../config-backups/{{ date_time }}"
+        state: directory
 
 - name: IOS ROUTERS
   hosts: routers
